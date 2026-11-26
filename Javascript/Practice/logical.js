@@ -8,3 +8,4 @@ let hasId = true;
 console.log(age >= 19 && hasId); // true
 console.log(age < 20 || !hasId); // false
 
+document.el

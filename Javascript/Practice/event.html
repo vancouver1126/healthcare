@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>클릭</button>
+
+    <script>
+        // 함수를 추가할 HTML 버튼을 불러옴
+        const btn = document.querySelector("button")
+        
+        // 버튼이 클릭되면 동작시킬 함수를 정의
+        function clickButton() {
+            alert("버튼이 클릭됨!")
+        }
+        
+        clickButton()
+
+        // EventListener: 어떤 이벤트가 발생했을 때, 동작하는 함수
+        btn.addEventListener(
+            "click", clickButton);
+    </script>
+    
+</body>
+</html>
