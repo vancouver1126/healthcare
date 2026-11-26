@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부자가 되어 봅시다!</title>
+    <link rel="stylesheet" href="cryptocurrency.css">
+</head>
+<body>
+    <div class="container">
+    <div class="header">
+        <h1>Do you want to be a billionaire?</h1>
+        <div class="header-buttons">
+            <div class="currency-toggle">
+                <button id="usdBtn" class="currency-btn active">$ 달러</button>
+                <button id="krwBtn" class="currency-btn">₩ 원화</button>
+            </div>
+            <button id="themeBtn" class="theme-btn">🌙 다크 모드</button>
+        </div>
+    </div>
+
+        <div class="tabs">
+            <button id="allTab" class="tab-btn active">전체보기</button>
+            <button id="favoritesTab" class="tab-btn">관심항목</button>
+            <button id="gainersTab" class="tab-btn">상승률</button>
+            <button id="losersTab" class="tab-btn">하락률</button>
+            <button id="volumeTab" class="tab-btn">거래량</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="코인 검색 (예: BTC)">
+        </div>
+
+        <div id="loading" class="loading">데이터를 불러오는 중...</div>
+        <div id="lastUpdated" class="last-updated"></div>
+        <table id="cryptoTable" class="hidden">
+            <thead>
+                <tr>
+                    <th>관심</th>
+                    <th class="sortable" data-sort="name">심볼</th>
+                    <th class="sortable" data-sort="price">현재가 (<span class="unit">USD</span>)</th>
+                    <th class="sortable" data-sort="changePercent">24시간 변동률</th>
+                    <th class="sortable" data-sort="high">최고가 (<span class="unit">USD</span>)</th>
+                    <th class="sortable" data-sort="low">최저가 (<span class="unit">USD</span>)</th>
+                    <th class="sortable" data-sort="volume">거래대금 (<span class="unit">USD</span>)</th>
+                </tr>
+            </thead>
+            <tbody id="cryptocurrencyList">
+                <!-- 데이터가 여기에 동적으로 추가됩니다. -->
+            </tbody>
+                </table>
+                <div id="pagination" class="pagination"></div>
+                <p class="credit">
+            환율 제공: <a href="https://www.exchangerate-api.com" target="_blank">Rates By Exchange Rate API</a>
+        </p>
+    </div>
+        <div id="chartModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button id="closeModalBtn" class="close-data-sortbtn">✕</button>
+            </div>
+            <div id="chartArea">여기에 그래프가 들어갈 거예요</div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="cryptocurrency.js"></script>
+    
+</body>
+</html>

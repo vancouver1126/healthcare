@@ -1,0 +1,268 @@
+/* 라이트 모드 색 (기본) */
+
+* {
+    box-sizing: border-box;
+}
+:root {
+    --bg: #ffffff;
+    --text: #222222;
+    --sub-text: #888888;
+    --border: #eeeeee;
+    --hover: #fffbea;
+    --btn-bg: #f5f5f5;
+    --up: #d60000;
+    --down: #0051c7;
+}
+
+/* 다크 모드 색: body에 dark 클래스가 붙으면 덮어쓰기 */
+body.dark {
+    --bg: #16181d;
+    --text: #eaecef;
+    --sub-text: #848e9c;
+    --border: #2b3139;
+    --hover: #1e2329;
+    --btn-bg: #2b3139;
+    --up: #f6465d;
+    --down: #3b82f6;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;   /* 바뀔 때 부드럽게 */
+}
+button,
+input {
+    background: var(--btn-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.hidden {
+    display: none;
+}
+
+.up {
+    color: #d60000;   /* 빨강 */
+}
+
+.down {
+    color: #0051c7;   /* 파랑 */
+}
+
+.last-updated {
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+}
+
+.error {
+    color: #d32f2f;
+}
+
+.tab-btn.active {
+    background: #f0b90b;
+    font-weight: bold;
+}
+
+.fav-btn {
+    border: none;
+    background: none;
+    font-size: 18px;
+    color: #f0b90b;
+    cursor: pointer;
+}
+
+th.sortable {
+    cursor: pointer;   /* 마우스를 올리면 손가락 모양 */
+}
+
+th.sortable.asc::after {
+    content: " ▲";
+}
+
+th.sortable.desc::after {
+    content: " ▼";
+}
+
+/* 전체 폭 가운데 정렬 */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* 표 */
+table {
+    width: 100%;
+    border-collapse: collapse;   /* 칸 사이 틈 없애기 */
+}
+
+th,
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    text-align: right;            /* 기본은 오른쪽 (숫자) */
+}
+
+/* 1번째(관심), 2번째(심볼) 칸은 왼쪽 */
+th:nth-child(1),
+td:nth-child(1),
+th:nth-child(2),
+td:nth-child(2) {
+    text-align: left;
+}
+
+th {
+    color: #555;
+    border-bottom: 2px solid #ddd;
+}
+
+/* 마우스 올린 줄 강조 */
+tbody tr:hover {
+    background: #fffbea;
+}
+
+/* 탭과 검색창 간격 */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+}
+
+.currency-toggle {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.currency-btn.active {
+    background: #222;
+    color: #fff;
+}
+
+.currency-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.credit {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+}
+
+.theme-btn {
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;   /* 제목은 왼쪽, 버튼은 오른쪽 끝 */
+    align-items: center;              /* 세로 가운데 맞춤 */
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.currency-toggle {
+    margin-bottom: 0;   /* 아까 준 아래 여백 없애기 */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 16px 0;
+}
+
+.pagination button {
+    min-width: 36px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #f0b90b;
+    color: #111;
+    font-weight: bold;
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#cryptocurrencyList tr {
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg);
+    color: var(--text);
+    width: 90%;
+    max-width: 800px;
+    padding: 20px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#chartArea {
+    position: relative;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--sub-text);
+}
+
+.pair {
+    font-size: 12px;
+    color: var(--sub-text);
+    margin-left: 2px;
+}
