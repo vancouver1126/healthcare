@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="pageSizeSelect">  <!-- ★ id 추가 -->
+        <option value="5">5개씩 보기</option>
+        <option value="10">10개씩 보기</option>
+        <option value="20">20개씩 보기</option>
+    </select>
+    
+
+    <ul style="list-style: none; padding: 0;"></ul>
+    <button id="prev">&lt; 이전페이지</button>
+    <span></span>
+    <button id="post">다음페이지 &gt;</button>
+    
+    <script>
+        const prevBtn = document.querySelector("#prev");
+        const postBtn = document.querySelector("#post");
+        
+        const span = document.querySelector("span");
+        const list = document.querySelector("ul");
+        const select = document.querySelector("#pageSizeSelect");  // ★ 추가
+        
+        let page = 1;
+        let pageSize = 5;
+        
+        // index 기준
+        // 1페이지: [0,5] 
+        // 2페이지: [5, 10]
+        // 3페이지: [10, 15]
+        
+        // start = (page - 1) * pageSize   ★ 공식 수정
+        // end = page * pageSize
+
+        // 게시글 pageSize개씩 불러와서 그리는 함수
+        function loadPosts() {
+            span.textContent = page + "페이지";
+            fetch("https://jsonplaceholder.typicode.com/posts")
+                .then(response => response.json())
+                .then(posts => {
+                    let start = (page - 1) * pageSize;
+                    let end = page * pageSize;
+
+                    list.innerHTML = "";
+
+                    let number = start + 1;  // ★ 추가: 1페이지면 1, 2페이지면 6부터
+
+                    for (const post of posts.slice(start, end)) {
+                        const li = document.createElement("li");
+                        li.textContent = number + ". " + post["title"]; 
+                        list.appendChild(li);
+
+                        number++;
+                    }
+                });
+
+            updatePageButton();
+        }
+        
+        function updatePageButton() {
+            const lastPage = Math.ceil(100 / pageSize);  // ★ 추가: 5개씩 20, 10개씩 10, 20개씩 5
+            prevBtn.disabled = page === 1;
+            postBtn.disabled = page === 100 / pageSize;
+        }
+        
+        // 이전 페이지로 이동
+        prevBtn.addEventListener("click", () => {
+            page--;
+            loadPosts();
+        });
+
+        // 다음 페이지로 이동
+        postBtn.addEventListener("click", () => {
+            page++;
+            loadPosts();
+        });
+
+        // ★ 추가: 몇 개씩 볼지 바꾸면 1페이지부터 다시
+        select.addEventListener("change", () => {
+            pageSize = Number(select.value);
+            page = 1;
+            loadPosts();
+        });
+    
+        select.addEventListener("change", (event) => {
+            pageSize = Number(event.target.value);
+            page = 1;
+            loadPosts();
+        });
+
+            
+        // 처음 열었을 때 바로 보여주기
+        loadPosts();
+    </script>
+</body>
+</html>
